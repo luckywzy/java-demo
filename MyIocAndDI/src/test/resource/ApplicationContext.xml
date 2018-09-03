@@ -1,0 +1,8 @@
+<beans>
+
+    <component-scan base-package="demo.TestObject.*"/>
+
+    <bean id="testObject1" class="demo.TestObject.TestObject1"/>
+    <bean id="testObject2" class="demo.TestObject.TestObject2"/>
+    <bean id="testObjectThree" class="demo.TestObject.TestObjectThree"/>
+</beans>
