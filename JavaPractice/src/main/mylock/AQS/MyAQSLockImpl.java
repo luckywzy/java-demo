@@ -8,6 +8,8 @@ import java.util.concurrent.locks.Lock;
 /**
  * 这里简单的实现lock 和 unlock
  * 以此了解 AbstractQueuedSynchronizer 的用法， 但却不止于此！！！
+ *
+ *
  */
 public class MyAQSLockImpl implements Lock {
 
