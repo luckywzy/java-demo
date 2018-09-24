@@ -1,5 +1,6 @@
 package com.testweb.controller;
 
+import demo.com.MyApplicationContext;
 import demo.com.helper.BeanManagerHelper;
 import org.junit.Assert;
 import org.junit.Before;
@@ -9,7 +10,7 @@ import java.util.Map;
 
 import static org.junit.Assert.*;
 
-public class HelloControllerTest {
+public class IocAndDITest {
 
     private Map<Class<?>, Object> map;
 
@@ -19,7 +20,7 @@ public class HelloControllerTest {
     }
 
     @Test
-    public void testNotEmpty(){
+    public void testBeanContainerNotEmpty(){
 
         Assert.assertNotEquals(map.size(), 0);
         for (Class<?> bean : map.keySet()) {
