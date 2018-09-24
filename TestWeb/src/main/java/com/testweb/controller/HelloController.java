@@ -13,7 +13,7 @@ public class HelloController {
     private HelloService helloService;
 
     @MyRequestMapping(path = "/sayHello", method = MyRequestMethod.GET)
-    public String sayHello(){
-        return helloService.sayHello();
+    public String sayHello(String name){
+        return helloService.sayHello(name);
     }
 }

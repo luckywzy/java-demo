@@ -19,6 +19,7 @@ public class InjectTest {
     public void testInject(){
 
         HelloController helloController = BeanManagerHelper.getBean(HelloController.class);
-        Assert.assertEquals("hello,world", helloController.sayHello());
+        String name="liming";
+        Assert.assertEquals("hello,"+name, helloController.sayHello(name));
     }
 }
