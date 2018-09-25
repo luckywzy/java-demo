@@ -55,6 +55,7 @@ public class ClassUtil {
     public static Set<Class<?>> getClassSet(String packageName) {
         Set<Class<?>> classSet = new HashSet<Class<?>>();
         try {
+            //替换包路径为 文件夹路径
             Enumeration<URL> urls = getClassLoader().getResources(packageName.replace(".", "/"));
             while (urls.hasMoreElements()) {
                 URL url = urls.nextElement();
@@ -89,6 +90,12 @@ public class ClassUtil {
         return classSet;
     }
 
+    /**
+     * 将
+     * @param classSet
+     * @param packagePath
+     * @param packageName
+     */
     private static void addClass(Set<Class<?>> classSet, String packagePath, String packageName) {
         File[] files = new File(packagePath).listFiles(new FileFilter() {
             public boolean accept(File file) {
