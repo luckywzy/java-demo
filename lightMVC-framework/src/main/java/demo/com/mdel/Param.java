@@ -3,6 +3,7 @@ package demo.com.mdel;
 import demo.com.utils.CastUtil;
 import org.apache.commons.collections4.CollectionUtils;
 
+import java.io.ObjectOutputStream;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -18,6 +19,18 @@ public class Param {
     public Param(List<ParamNode> formParams) {
         this.formParams = formParams;
     }
+
+    public Object[] toObject(){
+        final int len = formParams.size();
+        Object[] args = new Object[len];
+        for (int i=0; i<formParams.size(); i++)
+        {
+            args[i] = formParams.get(i).getFieldValue();
+        }
+
+        return args;
+    }
+
 
     /**
      * 获取参数对象映射

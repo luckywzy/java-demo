@@ -16,7 +16,7 @@ import java.util.Set;
 public class RequestManagerHelper {
 
     //请求和动作方法的映射
-    private static final Map<Request, RequestHandler> REQ_ACTION_MAP = new HashMap<>(64);
+    private static final Map<Request, RequestHandler> REQ_ACTION_MAP = new HashMap<>();
 
     static {
         Set<Class<?>> controllerBeanSet = BeanLoadHelper.getControllerBeanSet();
@@ -53,6 +53,7 @@ public class RequestManagerHelper {
      * @return
      */
     public static RequestHandler getHandler(MyRequestMethod requestMethod, String requestPath) {
+
         return REQ_ACTION_MAP.get(new Request(requestMethod, requestPath));
     }
 

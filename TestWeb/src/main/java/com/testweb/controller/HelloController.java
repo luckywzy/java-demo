@@ -16,4 +16,10 @@ public class HelloController {
     public String sayHello(String name){
         return helloService.sayHello(name);
     }
+
+
+    @MyRequestMapping(path = "/add", method = MyRequestMethod.GET)
+    public String add(Integer a, Integer b){
+        return String.valueOf(helloService.add(a, b));
+    }
 }

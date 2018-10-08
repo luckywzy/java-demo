@@ -15,6 +15,7 @@ public enum MyRequestMethod {
         this.type = type;
     }
 
+
     /*public String getType() {
         return type;
     }

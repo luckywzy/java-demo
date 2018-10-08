@@ -34,6 +34,11 @@ public class Request {
 
     @Override
     public boolean equals(Object obj) {
-        return EqualsBuilder.reflectionEquals(this,obj);
+        Request other = (Request) obj;
+        if(other.getRequestMethod().equals(this.requestMethod) && other.getRequestPath().equals(this.requestPath))
+            return true;
+
+        return false;
+        //return EqualsBuilder.reflectionEquals(this,obj);
     }
 }

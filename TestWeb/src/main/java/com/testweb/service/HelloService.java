@@ -8,4 +8,8 @@ public class HelloService {
     public String sayHello(String name) {
         return "hello,"+name;
     }
+
+    public Integer add(int a, int b) {
+        return a+b;
+    }
 }
