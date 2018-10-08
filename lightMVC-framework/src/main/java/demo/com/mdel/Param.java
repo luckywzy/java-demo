@@ -20,6 +20,7 @@ public class Param {
         this.formParams = formParams;
     }
 
+    //TODO:  转换为Object的参数 并不能在反射时 自动进行转型 String -》Integer
     public Object[] toObject(){
         final int len = formParams.size();
         Object[] args = new Object[len];
