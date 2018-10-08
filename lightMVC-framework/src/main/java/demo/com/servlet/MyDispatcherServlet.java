@@ -54,6 +54,7 @@ public class MyDispatcherServlet extends HttpServlet {
          */
         //注册处理jsp 的Servlet
         ServletRegistration jspregistration = servletContext.getServletRegistration("jsp");
+        jspregistration.addMapping("/index.jsp");
         jspregistration.addMapping(ConfigHelper.getAppJspPath() + "*");
 
         //注册处理静态资源的Servlet
