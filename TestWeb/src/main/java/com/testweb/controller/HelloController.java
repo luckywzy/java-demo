@@ -22,4 +22,9 @@ public class HelloController {
     public String add(Integer a, Integer b){
         return String.valueOf(helloService.add(a, b));
     }
+
+    @MyRequestMapping(path = "/dopost", method = MyRequestMethod.POST)
+    public String dopost(String name){
+        return helloService.recive(name);
+    }
 }

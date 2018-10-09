@@ -12,4 +12,8 @@ public class HelloService {
     public Integer add(int a, int b) {
         return a+b;
     }
+
+    public String recive(String name) {
+        return name;
+    }
 }
