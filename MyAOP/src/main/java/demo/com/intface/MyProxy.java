@@ -1,6 +1,6 @@
 package demo.com.intface;
 
-import demo.com.proxy.ProxyChain;
+import demo.com.proxy.MyProxyChain;
 
 /**
  * 代理接口
@@ -13,5 +13,5 @@ public interface MyProxy {
      * @return Object  代理方法的返回值
      * @throws Throwable
      */
-    Object doProxy(ProxyChain proxyChain) throws Throwable;
+    Object doProxy(MyProxyChain proxyChain) throws Throwable;
 }
