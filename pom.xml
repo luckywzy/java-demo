@@ -13,6 +13,7 @@
         <module>MyAOP</module>
         <module>lightMVC-framework</module>
         <module>TestWeb</module>
+        <module>netty</module>
     </modules>
 
     <properties>

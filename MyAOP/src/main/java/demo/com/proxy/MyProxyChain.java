@@ -35,19 +35,20 @@ public class MyProxyChain {
     /**
      * 代理链列表
      */
-    private List<MyProxy> proxyList = new ArrayList<>();
+    private List<MyProxy> proxyList;
     /**
      * 代理索引
      */
     private int proxyIndex = 0;
 
     public MyProxyChain(Class<?> targetClass, Object targetObj, Method targetMethod, Object[] methodArgs,
-            MethodProxy methodProxy) {
+            MethodProxy methodProxy, List<MyProxy> proxyList) {
         this.targetClass = targetClass;
         this.targetObj = targetObj;
         this.targetMethod = targetMethod;
         this.methodArgs = methodArgs;
         this.methodProxy = methodProxy;
+        this.proxyList = proxyList;
     }
 
     public Class<?> getTargetClass() {
