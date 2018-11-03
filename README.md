@@ -14,4 +14,12 @@
 - 测试在testWeb
 
 ### AOP 框架实现
-- 使用CGLIB生成的代理
+##### 原理
+使用CGLIB生成的代理类，并且支持多喝代理类
+##### 使用方式
+继承MyAspectProxy类，实现其中的切面方法（begin、interruptor、before、after、end、error），添加注解@MyAspect(MyController.class)
+MyController也是一个注解，目前实现仅支持对指定了某注解（例如@MyController）的类的**所有方法**进行代理；
+##### 需要进行优化的点
+- 指定AOP的规则
+- 仅对指定了规则的方法进行切面增强
+### IOC和AOP整合
