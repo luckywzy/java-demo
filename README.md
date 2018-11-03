@@ -12,3 +12,6 @@
 - IOC框架，DI依赖注入实现（注解实现）
 - 实现注解有：Controller， Service、Inject（自动注入）、RequestMapping（URL映射路径）
 - 测试在testWeb
+
+### AOP 框架实现
+- 使用CGLIB生成的代理
