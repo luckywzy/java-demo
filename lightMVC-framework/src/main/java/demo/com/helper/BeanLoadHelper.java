@@ -4,6 +4,7 @@ import demo.com.annotation.MyController;
 import demo.com.annotation.MyService;
 import demo.com.utils.ClassUtil;
 
+import java.lang.annotation.Annotation;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -60,6 +61,7 @@ public final class BeanLoadHelper {
     /**
      * 获取所有的需要管理的 bean
      * 就是 controller 和service
+     *
      * @return
      */
     public static Set<Class<?>> getAllBeanSet() {
@@ -68,6 +70,42 @@ public final class BeanLoadHelper {
         beanSet.addAll(getServiceBeanSet());
         beanSet.addAll(getControllerBeanSet());
         return beanSet;
+    }
+
+    /**
+     * 获取应用包下某父类或接口，的所有子类或实现类
+     *
+     * @param superClass
+     * @return
+     */
+    public static Set<Class<?>> getClassSetBySuper(Class<?> superClass) {
+        HashSet<Class<?>> classSet = new HashSet<>();
+        for (Class<?> cls : BEAN_SET) {
+            //判断是否是其子类或实现类
+            if (superClass.isAssignableFrom(cls) && !superClass.equals(cls)) {
+                classSet.add(cls);
+            }
+        }
+
+        return classSet;
+    }
+
+    /**
+     * 获取带有某注解的所有类
+     *
+     * @param annotationClass
+     * @return
+     */
+    public static Set<Class<?>> getClassSetByAnnotation(Class<? extends Annotation> annotationClass) {
+        HashSet<Class<?>> classSet = new HashSet<>();
+        for (Class<?> cls : BEAN_SET) {
+            //判断这个类上是否带有某注解
+            if (cls.isAnnotationPresent(annotationClass)) {
+                classSet.add(cls);
+            }
+        }
+
+        return classSet;
     }
 
 }
