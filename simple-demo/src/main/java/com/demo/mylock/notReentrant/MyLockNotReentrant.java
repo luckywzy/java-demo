@@ -1,4 +1,4 @@
-package main.mylock.notReentrant;
+package com.demo.mylock.notReentrant;
 
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Condition;

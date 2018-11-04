@@ -1,4 +1,4 @@
-package main.builder;
+package com.demo.builder;
 
 public class A {
     private String s;

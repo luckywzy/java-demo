@@ -1,4 +1,4 @@
-package main.mylock.failLock;
+package com.demo.mylock.failLock;
 
 import java.util.ArrayList;
 import java.util.List;

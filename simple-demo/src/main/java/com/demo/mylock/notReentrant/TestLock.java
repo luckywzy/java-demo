@@ -1,4 +1,4 @@
-package main.mylock.notReentrant;
+package com.demo.mylock.notReentrant;
 
 public class TestLock {
 

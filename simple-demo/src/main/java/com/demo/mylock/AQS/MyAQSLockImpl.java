@@ -1,4 +1,4 @@
-package main.mylock.AQS;
+package com.demo.mylock.AQS;
 
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.AbstractQueuedSynchronizer;

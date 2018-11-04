@@ -6,7 +6,7 @@
 ### 非常简单的IOC和DI的实现
 
 ### Java的不可重入锁和可重入锁的简单实现
-
+-
 ### MVC 框架的简单实现
 - 包括实现 dispatchServlet 请求派发器、View 视图、 Data 数据；其中view和Data都可以携带数据 即model
 - IOC框架，DI依赖注入实现（注解实现）
@@ -22,4 +22,10 @@ MyController也是一个注解，目前实现仅支持对指定了某注解（�
 ##### 需要进行优化的点
 - 指定AOP的规则
 - 仅对指定了规则的方法进行切面增强
+
+##### ThreadLocal 
+
 ### IOC和AOP整合
+- AOPHelper 初始化AOP
+- 加入到 MyApplicationContext的初始化列表 中
+- 添加pom 

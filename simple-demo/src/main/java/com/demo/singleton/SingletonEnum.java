@@ -1,4 +1,4 @@
-package main.singleton;
+package com.demo.singleton;
 
 public enum SingletonEnum {
     INSTALL;

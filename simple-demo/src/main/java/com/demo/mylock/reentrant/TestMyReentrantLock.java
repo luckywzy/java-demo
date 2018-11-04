@@ -1,4 +1,4 @@
-package main.mylock.reentrant;
+package com.demo.mylock.reentrant;
 
 public class TestMyReentrantLock {
 

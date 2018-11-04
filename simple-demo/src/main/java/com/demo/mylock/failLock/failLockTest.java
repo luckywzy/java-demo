@@ -1,12 +1,7 @@
-package main.mylock.failLock;
-
-import org.junit.Test;
+package com.demo.mylock.failLock;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.locks.ReadWriteLock;
-
-import static org.junit.Assert.*;
 
 public class failLockTest {
 
