@@ -4,6 +4,7 @@
 # maven ignore
 target/
 out/
+classes/
 
 # eclipse ignore
 .settings/

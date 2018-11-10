@@ -1,0 +1,7 @@
+#设置日志输出
+logging:
+  pattern:
+    console: "[%d]-[%t]-[%c]-[%p] - %msg%n"
+  level:
+    #这里可以是包名也可以是类名
+    com.lonely: debug

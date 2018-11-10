@@ -1,9 +1,11 @@
 package demo.com.helper;
 
 import demo.com.annotation.MyAspect;
+import demo.com.annotation.MyService;
 import demo.com.intface.MyProxy;
 import demo.com.proxy.MyAspectProxy;
 import demo.com.proxy.MyProxyManager;
+import demo.com.transaction.TransactionProxy;
 import lombok.extern.slf4j.Slf4j;
 
 import java.lang.annotation.Annotation;
@@ -48,6 +50,29 @@ public class AOPHelper {
     private static Map<Class<?>, Set<Class<?>>> createProxyMap() throws Exception {
 
         HashMap<Class<?>, Set<Class<?>>> proxyMap = new HashMap<>();
+        addAspectProxy(proxyMap);
+        addTransactionProxy(proxyMap);
+        return proxyMap;
+    }
+
+    /**
+     * 添加事务切面类
+     *
+     * @param proxyMap
+     */
+    private static void addTransactionProxy(HashMap<Class<?>, Set<Class<?>>> proxyMap) {
+        Set<Class<?>> serviceClasses = BeanLoadHelper.getClassSetByAnnotation(MyService.class);
+        proxyMap.put(TransactionProxy.class, serviceClasses);
+
+    }
+
+    /**
+     * 添加普通的切面类
+     *
+     * @param proxyMap
+     * @throws Exception
+     */
+    private static void addAspectProxy(HashMap<Class<?>, Set<Class<?>>> proxyMap) throws Exception {
         Set<Class<?>> proxyClassSet = BeanLoadHelper.getClassSetBySuper(MyAspectProxy.class);
         for (Class<?> proxyClass : proxyClassSet) {
             if (proxyClass.isAnnotationPresent(MyAspect.class)) {
@@ -56,8 +81,6 @@ public class AOPHelper {
                 proxyMap.put(proxyClass, targetClassSet);
             }
         }
-
-        return proxyMap;
     }
 
     /**
