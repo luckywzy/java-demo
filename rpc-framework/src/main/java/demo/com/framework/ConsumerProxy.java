@@ -11,7 +11,7 @@ import java.net.Socket;
 /**
  * 服务消费者代理类
  */
-//@Slf4j
+@Slf4j
 public class ConsumerProxy {
 
     /**
@@ -24,11 +24,12 @@ public class ConsumerProxy {
      * @return
      * @throws Exception
      */
+    @SuppressWarnings("unchecked")
     public static <T> T consume(final Class<T> interfaceCls,
                                 final String host,
                                 final int port
     ) throws Exception {
-        return(T) Proxy.newProxyInstance(interfaceCls.getClassLoader(),
+        return (T) Proxy.newProxyInstance(interfaceCls.getClassLoader(),
                 new Class<?>[]{interfaceCls},
                 (InvocationHandler) (proxy, method, args) -> {
                     try (
@@ -47,7 +48,7 @@ public class ConsumerProxy {
                                     throw (Throwable) result;
                                 return result;
                             } catch (Exception e) {
-                                /* log.warn("Exception:{}", e);*/
+                               /* log.wran("Exception:{}", e);*/
                                 throw e;
                             }
                         } catch (Exception e) {
