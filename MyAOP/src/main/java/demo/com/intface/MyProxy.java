@@ -7,11 +7,12 @@ import demo.com.proxy.MyProxyChain;
  */
 public interface MyProxy {
 
-    /**
-     * 执行链式代理
-     * @param proxyChain  代理链
-     * @return Object  代理方法的返回值
-     * @throws Throwable
-     */
-    Object doProxy(MyProxyChain proxyChain) throws Throwable;
+	/**
+	 * 执行链式代理
+	 *
+	 * @param proxyChain 代理链
+	 * @return Object  代理方法的返回值
+	 * @throws Throwable
+	 */
+	Object doProxy(MyProxyChain proxyChain) throws Throwable;
 }

@@ -8,10 +8,10 @@ import lombok.extern.slf4j.Slf4j;
 @MyService
 public class TranscationService {
 
-    @MyTransaction
-    public String tranA(String a){
-        log.debug("tranA with args:{}", a);
+	@MyTransaction
+	public String tranA(String a) {
+		log.debug("tranA with args:{}", a);
 
-        return a;
-    }
+		return a;
+	}
 }

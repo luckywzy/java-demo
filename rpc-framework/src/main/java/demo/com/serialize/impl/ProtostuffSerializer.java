@@ -12,7 +12,6 @@ public class ProtostuffSerializer implements ISerializer {
 	}
 
 	/**
-	 *
 	 * @param data
 	 * @param tClass
 	 * @param <T>

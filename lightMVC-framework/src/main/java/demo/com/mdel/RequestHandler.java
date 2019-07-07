@@ -7,22 +7,22 @@ import java.lang.reflect.Method;
  */
 public class RequestHandler {
 
-    //controller 类
-    private Class<?> controllerClass;
+	//controller 类
+	private Class<?> controllerClass;
 
-    // requestMapping 对应的方法
-    private Method ActionMethod;
+	// requestMapping 对应的方法
+	private Method ActionMethod;
 
-    public RequestHandler(Class<?> controllerClass, Method actionMethod) {
-        this.controllerClass = controllerClass;
-        ActionMethod = actionMethod;
-    }
+	public RequestHandler(Class<?> controllerClass, Method actionMethod) {
+		this.controllerClass = controllerClass;
+		ActionMethod = actionMethod;
+	}
 
-    public Class<?> getControllerClass() {
-        return controllerClass;
-    }
+	public Class<?> getControllerClass() {
+		return controllerClass;
+	}
 
-    public Method getActionMethod() {
-        return ActionMethod;
-    }
+	public Method getActionMethod() {
+		return ActionMethod;
+	}
 }

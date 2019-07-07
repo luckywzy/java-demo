@@ -12,52 +12,52 @@ import java.util.List;
  */
 public class failLock {
 
-    private boolean isLocked = false;
-    private Thread lockingThread = null;
-    private List<QueueObject> waitingTheads = new ArrayList<>();
+	private boolean isLocked = false;
+	private Thread lockingThread = null;
+	private List<QueueObject> waitingTheads = new ArrayList<>();
 
-    public void lock() throws InterruptedException {
+	public void lock() throws InterruptedException {
 
-        QueueObject queueObject = new QueueObject();
-        boolean isLockedForCuruentThread = true;
-        System.out.println("lock " + Thread.currentThread().getName());
-        synchronized (this) {
-            System.out.println("add " + Thread.currentThread().getName());
-            waitingTheads.add(queueObject);
-        }
+		QueueObject queueObject = new QueueObject();
+		boolean isLockedForCuruentThread = true;
+		System.out.println("lock " + Thread.currentThread().getName());
+		synchronized (this) {
+			System.out.println("add " + Thread.currentThread().getName());
+			waitingTheads.add(queueObject);
+		}
 
-        while (isLockedForCuruentThread) {
-            synchronized (this) {
-                isLockedForCuruentThread = isLocked || waitingTheads.get(0) != queueObject;
-                if (!isLockedForCuruentThread) {
-                    isLocked = true;
-                    waitingTheads.remove(queueObject);
-                    lockingThread = Thread.currentThread();
-                    return;
-                }
-                try {
-                    queueObject.doWait();
-                } catch (InterruptedException e) {
-                    synchronized (this) {
-                        waitingTheads.remove(queueObject);
-                    }
-                    throw e;
-                }
-            }
-        }
-    }
+		while (isLockedForCuruentThread) {
+			synchronized (this) {
+				isLockedForCuruentThread = isLocked || waitingTheads.get(0) != queueObject;
+				if (!isLockedForCuruentThread) {
+					isLocked = true;
+					waitingTheads.remove(queueObject);
+					lockingThread = Thread.currentThread();
+					return;
+				}
+				try {
+					queueObject.doWait();
+				} catch (InterruptedException e) {
+					synchronized (this) {
+						waitingTheads.remove(queueObject);
+					}
+					throw e;
+				}
+			}
+		}
+	}
 
-    public synchronized void unlock() {
-        if (this.lockingThread != Thread.currentThread()) {
-            throw new IllegalMonitorStateException();
-        }
+	public synchronized void unlock() {
+		if (this.lockingThread != Thread.currentThread()) {
+			throw new IllegalMonitorStateException();
+		}
 
-        isLocked = false;
-        lockingThread = null;
-        System.out.println("unlock " + lockingThread.getName());
-        if (waitingTheads.size() > 0) {
-            waitingTheads.get(0).doNotify();
-        }
+		isLocked = false;
+		lockingThread = null;
+		System.out.println("unlock " + lockingThread.getName());
+		if (waitingTheads.size() > 0) {
+			waitingTheads.get(0).doNotify();
+		}
 
-    }
+	}
 }

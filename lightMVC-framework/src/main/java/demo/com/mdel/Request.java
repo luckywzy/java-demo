@@ -9,36 +9,36 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
  */
 public class Request {
 
-    //请求方法
-    private MyRequestMethod requestMethod;
-    //请求路径
-    private String requestPath;
+	//请求方法
+	private MyRequestMethod requestMethod;
+	//请求路径
+	private String requestPath;
 
-    public Request(MyRequestMethod requestMethod, String requestPath) {
-        this.requestMethod = requestMethod;
-        this.requestPath = requestPath;
-    }
+	public Request(MyRequestMethod requestMethod, String requestPath) {
+		this.requestMethod = requestMethod;
+		this.requestPath = requestPath;
+	}
 
-    public MyRequestMethod getRequestMethod() {
-        return requestMethod;
-    }
+	public MyRequestMethod getRequestMethod() {
+		return requestMethod;
+	}
 
-    public String getRequestPath() {
-        return requestPath;
-    }
+	public String getRequestPath() {
+		return requestPath;
+	}
 
-    @Override
-    public int hashCode() {
-        return HashCodeBuilder.reflectionHashCode(this);
-    }
+	@Override
+	public int hashCode() {
+		return HashCodeBuilder.reflectionHashCode(this);
+	}
 
-    @Override
-    public boolean equals(Object obj) {
-        Request other = (Request) obj;
-        if(other.getRequestMethod().equals(this.requestMethod) && other.getRequestPath().equals(this.requestPath))
-            return true;
+	@Override
+	public boolean equals(Object obj) {
+		Request other = (Request) obj;
+		if (other.getRequestMethod().equals(this.requestMethod) && other.getRequestPath().equals(this.requestPath))
+			return true;
 
-        return false;
-        //return EqualsBuilder.reflectionEquals(this,obj);
-    }
+		return false;
+		//return EqualsBuilder.reflectionEquals(this,obj);
+	}
 }

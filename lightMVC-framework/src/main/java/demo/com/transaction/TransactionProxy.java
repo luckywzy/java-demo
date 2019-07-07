@@ -14,46 +14,46 @@ import java.lang.reflect.Method;
 @Slf4j
 public class TransactionProxy implements MyProxy {
 
-    private static final ThreadLocal<Boolean> FLAG_HOLDER = new ThreadLocal<Boolean>() {
-        @Override
-        protected Boolean initialValue() {
-            return false;
-        }
-    };
+	private static final ThreadLocal<Boolean> FLAG_HOLDER = new ThreadLocal<Boolean>() {
+		@Override
+		protected Boolean initialValue() {
+			return false;
+		}
+	};
 
-    @Override
-    public Object doProxy(MyProxyChain proxyChain) throws Throwable {
+	@Override
+	public Object doProxy(MyProxyChain proxyChain) throws Throwable {
 
-        Object result;
-        boolean flag = FLAG_HOLDER.get();
-        Method targetMethod = proxyChain.getTargetMethod();
-        //判断是否有 事务注解，确定是否做代理
-        if (!flag && targetMethod.isAnnotationPresent(MyTransaction.class)) {
-            FLAG_HOLDER.set(true);
-            try {
-                DataBaseHelper.beginTransaction();
-                if (log.isDebugEnabled()) {
-                    log.debug("begin transaction");
-                }
-                result = proxyChain.doProxyChain();
-                DataBaseHelper.commitTransaction();
-                if (log.isDebugEnabled()) {
-                    log.debug("commit transaction");
-                }
-            } catch (Exception e) {
-                log.warn("rollback transaction");
-                DataBaseHelper.rollbackTransaction();
-                if (log.isDebugEnabled()) {
-                    log.debug("rollback transaction");
-                }
-                throw e;
-            }finally {
-                FLAG_HOLDER.remove();
-            }
-        }else {
-            result = proxyChain.doProxyChain();
+		Object result;
+		boolean flag = FLAG_HOLDER.get();
+		Method targetMethod = proxyChain.getTargetMethod();
+		//判断是否有 事务注解，确定是否做代理
+		if (!flag && targetMethod.isAnnotationPresent(MyTransaction.class)) {
+			FLAG_HOLDER.set(true);
+			try {
+				DataBaseHelper.beginTransaction();
+				if (log.isDebugEnabled()) {
+					log.debug("begin transaction");
+				}
+				result = proxyChain.doProxyChain();
+				DataBaseHelper.commitTransaction();
+				if (log.isDebugEnabled()) {
+					log.debug("commit transaction");
+				}
+			} catch (Exception e) {
+				log.warn("rollback transaction");
+				DataBaseHelper.rollbackTransaction();
+				if (log.isDebugEnabled()) {
+					log.debug("rollback transaction");
+				}
+				throw e;
+			} finally {
+				FLAG_HOLDER.remove();
+			}
+		} else {
+			result = proxyChain.doProxyChain();
 
-        }
-        return result;
-    }
+		}
+		return result;
+	}
 }

@@ -10,14 +10,14 @@ import java.util.List;
 public class MsgDecoder extends MessageToMessageDecoder<ByteBuf> {
 
 
-    @Override
-    protected void decode(ChannelHandlerContext channelHandlerContext, ByteBuf byteBuf, List<Object> list) throws Exception {
-        final int len = byteBuf.readableBytes();
-        Byte[] rsv;
-        rsv = new Byte[len];
-        int index =byteBuf.readerIndex();
+	@Override
+	protected void decode(ChannelHandlerContext channelHandlerContext, ByteBuf byteBuf, List<Object> list) throws Exception {
+		final int len = byteBuf.readableBytes();
+		Byte[] rsv;
+		rsv = new Byte[len];
+		int index = byteBuf.readerIndex();
        /* byteBuf.getBytes(index, rsv, 0, len);
         MessagePack messagePack = new MessagePack();
         list.add(messagePack.read(rsv));*/
-    }
+	}
 }

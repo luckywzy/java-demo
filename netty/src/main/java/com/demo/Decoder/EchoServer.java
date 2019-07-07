@@ -17,46 +17,46 @@ import io.netty.handler.logging.LoggingHandler;
 
 public class EchoServer {
 
-    public void bind(int port) throws Exception {
-        NioEventLoopGroup bossGroup = new NioEventLoopGroup();
-        NioEventLoopGroup workerGroup = new NioEventLoopGroup();
-        try {
-            ServerBootstrap bootstrap = new ServerBootstrap();
-            bootstrap.group(bossGroup, workerGroup)
-                    .channel(NioServerSocketChannel.class)
-                    .option(ChannelOption.SO_BACKLOG, 100)
-                    .handler(new LoggingHandler(LogLevel.DEBUG))
-                    .childHandler(new ChannelInitializer<SocketChannel>() {
-                        @Override
-                        protected void initChannel(SocketChannel channel) throws Exception {
-                            /**
-                             * 使用特定字符解码器
-                             */
+	public void bind(int port) throws Exception {
+		NioEventLoopGroup bossGroup = new NioEventLoopGroup();
+		NioEventLoopGroup workerGroup = new NioEventLoopGroup();
+		try {
+			ServerBootstrap bootstrap = new ServerBootstrap();
+			bootstrap.group(bossGroup, workerGroup)
+					.channel(NioServerSocketChannel.class)
+					.option(ChannelOption.SO_BACKLOG, 100)
+					.handler(new LoggingHandler(LogLevel.DEBUG))
+					.childHandler(new ChannelInitializer<SocketChannel>() {
+						@Override
+						protected void initChannel(SocketChannel channel) throws Exception {
+							/**
+							 * 使用特定字符解码器
+							 */
                             /*ByteBuf delimiter = Unpooled.copiedBuffer("$_".getBytes());
                             channel.pipeline().addLast(new DelimiterBasedFrameDecoder(1024, delimiter));*/
-                            /**
-                             * 使用固定长度解码器
-                             */
-                            channel.pipeline().addLast(new FixedLengthFrameDecoder(20));
-                            channel.pipeline().addLast(new StringDecoder());
-                            channel.pipeline().addLast(new EchoServerHandler());
+							/**
+							 * 使用固定长度解码器
+							 */
+							channel.pipeline().addLast(new FixedLengthFrameDecoder(20));
+							channel.pipeline().addLast(new StringDecoder());
+							channel.pipeline().addLast(new EchoServerHandler());
 
-                        }
-                    });
+						}
+					});
 
-            ChannelFuture future = bootstrap.bind(port).sync();
+			ChannelFuture future = bootstrap.bind(port).sync();
 
-            future.channel().closeFuture().sync();
-        } finally {
-            bossGroup.shutdownGracefully();
-            workerGroup.shutdownGracefully();
-        }
+			future.channel().closeFuture().sync();
+		} finally {
+			bossGroup.shutdownGracefully();
+			workerGroup.shutdownGracefully();
+		}
 
-    }
+	}
 
 
-    public static void main(String[] args) throws Exception {
-        int port = 9191;
-        new EchoServer().bind(port);
-    }
+	public static void main(String[] args) throws Exception {
+		int port = 9191;
+		new EchoServer().bind(port);
+	}
 }

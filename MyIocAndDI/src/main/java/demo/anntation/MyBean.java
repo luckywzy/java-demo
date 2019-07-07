@@ -9,5 +9,5 @@ import java.lang.annotation.Target;
 @Target({ElementType.TYPE}) //声明该注解用于类、接口等定义时期
 public @interface MyBean {
 
-    public String name() default "";
+	public String name() default "";
 }

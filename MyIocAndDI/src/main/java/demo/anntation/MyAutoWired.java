@@ -11,5 +11,5 @@ import java.lang.annotation.Target;
 @Target({ElementType.FIELD, ElementType.METHOD})
 public @interface MyAutoWired {
 
-    public String name() default "";
+	public String name() default "";
 }

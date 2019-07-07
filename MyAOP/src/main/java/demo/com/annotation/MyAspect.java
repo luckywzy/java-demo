@@ -13,9 +13,10 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface MyAspect {
 
-    /**
-     * 注解
-     * @return
-     */
-    Class<? extends Annotation> value();
+	/**
+	 * 注解
+	 *
+	 * @return
+	 */
+	Class<? extends Annotation> value();
 }

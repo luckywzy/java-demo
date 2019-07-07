@@ -6,12 +6,12 @@ import static org.junit.Assert.*;
 
 public class BeanManagerHelperTest {
 
-    @Test
-    public void getBeanMap() {
-        BeanManagerHelper.getBeanMap();
-    }
+	@Test
+	public void getBeanMap() {
+		BeanManagerHelper.getBeanMap();
+	}
 
-    @Test
-    public void getBean() {
-    }
+	@Test
+	public void getBean() {
+	}
 }

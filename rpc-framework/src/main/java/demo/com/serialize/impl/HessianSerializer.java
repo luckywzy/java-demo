@@ -13,7 +13,7 @@ public class HessianSerializer implements ISerializer {
 		try {
 			ByteArrayOutputStream output = new ByteArrayOutputStream();
 			/*HessianOutput hessianOutput = new HessianOutput(output);*/
-		}catch (Exception e){
+		} catch (Exception e) {
 
 		}
 		return new byte[0];

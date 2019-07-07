@@ -25,6 +25,7 @@ public class SerialzerEngine {
 
 	/**
 	 * 序列化
+	 *
 	 * @param obj
 	 * @param serializeType
 	 * @param <T>
@@ -37,42 +38,38 @@ public class SerialzerEngine {
 		}
 
 		ISerializer serializer = serializeMap.get(type);
-		if(serializer == null)
-		{
+		if (serializer == null) {
 			throw new RuntimeException("Serialize error");
 		}
 		try {
 			return serializer.serialize(obj);
-		}catch (Exception e)
-		{
+		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
 	}
 
 	/**
 	 * 反序列化
+	 *
 	 * @param data
 	 * @param cls
 	 * @param serializeType
 	 * @param <T>
 	 * @return T
 	 */
-	public static <T> T  deserialize(byte[] data,Class<T> cls, String serializeType)
-	{
+	public static <T> T deserialize(byte[] data, Class<T> cls, String serializeType) {
 		SerializeType type = SerializeType.queryByType(serializeType);
 		if (type == null) {
 			throw new RuntimeException("SerializeType not found");
 		}
 
 		ISerializer serializer = serializeMap.get(type);
-		if(serializer == null)
-		{
+		if (serializer == null) {
 			throw new RuntimeException("Serialize error");
 		}
 		try {
-			return serializer.deSerialize(data,cls);
-		}catch (Exception e)
-		{
+			return serializer.deSerialize(data, cls);
+		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
 	}

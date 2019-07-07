@@ -8,18 +8,18 @@ import org.junit.Test;
 
 public class InjectTest {
 
-    MyApplicationContext context;
+	MyApplicationContext context;
 
-    @Before
-    public void init(){
-        MyApplicationContext.init();
-    }
+	@Before
+	public void init() {
+		MyApplicationContext.init();
+	}
 
-    @Test
-    public void testInject(){
+	@Test
+	public void testInject() {
 
-        HelloController helloController = BeanManagerHelper.getBean(HelloController.class);
-        String name="liming";
-        Assert.assertEquals("hello,"+name, helloController.sayHello(name));
-    }
+		HelloController helloController = BeanManagerHelper.getBean(HelloController.class);
+		String name = "liming";
+		Assert.assertEquals("hello," + name, helloController.sayHello(name));
+	}
 }

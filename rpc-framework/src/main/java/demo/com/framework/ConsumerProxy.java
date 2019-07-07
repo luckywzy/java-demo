@@ -14,52 +14,52 @@ import java.net.Socket;
 @Slf4j
 public class ConsumerProxy {
 
-    /**
-     * 服务消费代理接口
-     *
-     * @param interfaceCls
-     * @param host
-     * @param port
-     * @param <T>
-     * @return
-     * @throws Exception
-     */
-    @SuppressWarnings("unchecked")
-    public static <T> T consume(final Class<T> interfaceCls,
-                                final String host,
-                                final int port
-    ) throws Exception {
-        return (T) Proxy.newProxyInstance(interfaceCls.getClassLoader(),
-                new Class<?>[]{interfaceCls},
-                (InvocationHandler) (proxy, method, args) -> {
-                    try (
-                            Socket socket = new Socket(host, port);
-                            ObjectOutputStream output = new ObjectOutputStream(socket.getOutputStream())) {
-                        try {
-                            //写入socket
-                            //方法名
-                            output.writeUTF(method.getName());
-                            //参数
-                            output.writeObject(args);
-                            //获取结果
-                            try (ObjectInputStream input = new ObjectInputStream(socket.getInputStream());) {
-                                Object result = input.readObject();
-                                if (result instanceof Throwable)
-                                    throw (Throwable) result;
-                                return result;
-                            } catch (Exception e) {
-                               /* log.wran("Exception:{}", e);*/
-                                throw e;
-                            }
-                        } catch (Exception e) {
-                            /* log.warn("Exception:{}", e);*/
-                            throw e;
-                        }
-                    } catch (Exception e) {
-                        /* log.warn("Exception:{}", e);*/
-                        throw e;
-                    }
-                });
+	/**
+	 * 服务消费代理接口
+	 *
+	 * @param interfaceCls
+	 * @param host
+	 * @param port
+	 * @param <T>
+	 * @return
+	 * @throws Exception
+	 */
+	@SuppressWarnings("unchecked")
+	public static <T> T consume(final Class<T> interfaceCls,
+	                            final String host,
+	                            final int port
+	) throws Exception {
+		return (T) Proxy.newProxyInstance(interfaceCls.getClassLoader(),
+				new Class<?>[]{interfaceCls},
+				(InvocationHandler) (proxy, method, args) -> {
+					try (
+							Socket socket = new Socket(host, port);
+							ObjectOutputStream output = new ObjectOutputStream(socket.getOutputStream())) {
+						try {
+							//写入socket
+							//方法名
+							output.writeUTF(method.getName());
+							//参数
+							output.writeObject(args);
+							//获取结果
+							try (ObjectInputStream input = new ObjectInputStream(socket.getInputStream());) {
+								Object result = input.readObject();
+								if (result instanceof Throwable)
+									throw (Throwable) result;
+								return result;
+							} catch (Exception e) {
+								/* log.wran("Exception:{}", e);*/
+								throw e;
+							}
+						} catch (Exception e) {
+							/* log.warn("Exception:{}", e);*/
+							throw e;
+						}
+					} catch (Exception e) {
+						/* log.warn("Exception:{}", e);*/
+						throw e;
+					}
+				});
 
-    }
+	}
 }

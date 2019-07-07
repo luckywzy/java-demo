@@ -12,19 +12,19 @@ import static org.junit.Assert.*;
 
 public class IocAndDITest {
 
-    private Map<Class<?>, Object> map;
+	private Map<Class<?>, Object> map;
 
-    @Before
-    public void getBeanContainer() {
-        map = BeanManagerHelper.getBeanMap();
-    }
+	@Before
+	public void getBeanContainer() {
+		map = BeanManagerHelper.getBeanMap();
+	}
 
-    @Test
-    public void testBeanContainerNotEmpty(){
+	@Test
+	public void testBeanContainerNotEmpty() {
 
-        Assert.assertNotEquals(map.size(), 0);
-        for (Class<?> bean : map.keySet()) {
-            System.out.println(bean+":"+BeanManagerHelper.getBean(bean));
-        }
-    }
+		Assert.assertNotEquals(map.size(), 0);
+		for (Class<?> bean : map.keySet()) {
+			System.out.println(bean + ":" + BeanManagerHelper.getBean(bean));
+		}
+	}
 }

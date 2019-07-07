@@ -1,19 +1,19 @@
 package demo.com.annotation;
 
 public enum MyRequestMethod {
-    GET("get"),
-    HEAD("head"),
-    POST("post"),
-    PUT("put"),
-    PATCH("patch"),
-    DELETE("delete"),
-    OPTIONS("options"),
-    TRACE("trace");
-    private  String type;
+	GET("get"),
+	HEAD("head"),
+	POST("post"),
+	PUT("put"),
+	PATCH("patch"),
+	DELETE("delete"),
+	OPTIONS("options"),
+	TRACE("trace");
+	private String type;
 
-    private MyRequestMethod(String type) {
-        this.type = type;
-    }
+	private MyRequestMethod(String type) {
+		this.type = type;
+	}
 
 
     /*public String getType() {

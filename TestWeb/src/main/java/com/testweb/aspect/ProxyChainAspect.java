@@ -14,27 +14,27 @@ import java.lang.reflect.Method;
 @MyAspect(MyController.class)
 public class ProxyChainAspect extends MyAspectProxy {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ProxyChainAspect.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(ProxyChainAspect.class);
 
-    private Long begin;
+	private Long begin;
 
-    @Override
-    public void before(Class<?> cls, Method method, Object[] args) throws Throwable {
-        LOGGER.debug("ProxyChainAspect------------------begin-------------------------");
-        LOGGER.debug("ProxyChainAspect======before");
-        LOGGER.debug(String.format("class：%s # %s", cls.getName(), method.getName()));
-        begin = System.currentTimeMillis();
-    }
+	@Override
+	public void before(Class<?> cls, Method method, Object[] args) throws Throwable {
+		LOGGER.debug("ProxyChainAspect------------------begin-------------------------");
+		LOGGER.debug("ProxyChainAspect======before");
+		LOGGER.debug(String.format("class：%s # %s", cls.getName(), method.getName()));
+		begin = System.currentTimeMillis();
+	}
 
-    @Override
-    public void after(Class<?> cls, Method method, Object[] args) throws Throwable {
+	@Override
+	public void after(Class<?> cls, Method method, Object[] args) throws Throwable {
 
-        LOGGER.debug(String.format("used time : %dms", System.currentTimeMillis() - begin));
-        LOGGER.debug("ProxyChainAspect======after");
-    }
+		LOGGER.debug(String.format("used time : %dms", System.currentTimeMillis() - begin));
+		LOGGER.debug("ProxyChainAspect======after");
+	}
 
-    @Override
-    public void end() {
-        LOGGER.debug("ProxyChainAspect======end");
-    }
+	@Override
+	public void end() {
+		LOGGER.debug("ProxyChainAspect======end");
+	}
 }

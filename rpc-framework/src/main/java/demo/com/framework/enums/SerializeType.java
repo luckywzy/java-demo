@@ -32,16 +32,16 @@ public enum SerializeType {
 
 	/**
 	 * 获取序列化实现类
+	 *
 	 * @param serializeType
 	 * @return
 	 */
 	public static SerializeType queryByType(String serializeType) {
-		if(StringUtils.isBlank(serializeType)){
+		if (StringUtils.isBlank(serializeType)) {
 			return null;
 		}
-		for (SerializeType type: SerializeType.values())
-		{
-			if(StringUtils.equals(serializeType, type.getSerializeType())){
+		for (SerializeType type : SerializeType.values()) {
+			if (StringUtils.equals(serializeType, type.getSerializeType())) {
 				return type;
 			}
 		}

@@ -5,16 +5,16 @@ package demo.com.mdel;
  */
 public class RetData {
 
-    //数据
-    private Object model;
+	//数据
+	private Object model;
 
-    public RetData(Object model) {
-        this.model = model;
-    }
+	public RetData(Object model) {
+		this.model = model;
+	}
 
-    public Object getModel() {
-        return model;
-    }
+	public Object getModel() {
+		return model;
+	}
 }
 
 
