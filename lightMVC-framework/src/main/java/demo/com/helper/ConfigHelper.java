@@ -11,8 +11,6 @@ import java.util.Properties;
  * 用来获取属性文件的助手
  */
 public final class ConfigHelper {
-
-	private static final Logger LOGGER = LoggerFactory.getLogger(ConfigHelper.class);
 	//属性文件对象
 	private static final Properties CONFIG_PROPERTIES = PropsUtil.loadPropsfile(ConfigConstant.CONFIG_FILE);
 
@@ -49,5 +47,9 @@ public final class ConfigHelper {
 	//get static resources path
 	public static String getAppStaticPath() {
 		return PropsUtil.getString(CONFIG_PROPERTIES, ConfigConstant.APP_STATIC_PATH, "/static/");
+	}
+	//get upload limit
+	public static String getAppUploadLimit() {
+		return PropsUtil.getString(CONFIG_PROPERTIES, ConfigConstant.APP_UPLOAD_LIMIT);
 	}
 }

@@ -1,7 +1,7 @@
 package demo.com.helper;
 
 import demo.com.mdel.Param;
-import demo.com.mdel.ParamNode;
+import demo.com.mdel.FormParam;
 import demo.com.utils.CodeUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 请求 辅助类，帮助解析请求参数
@@ -22,7 +21,7 @@ public class RequestHelper {
 
 	//TODO:  这里获取的参数顺序就是传递给Controller的参数顺序
 	public static Param createParams(HttpServletRequest request) throws IOException {
-		List<ParamNode> formParams = new ArrayList<>();
+		List<FormParam> formParams = new ArrayList<>();
 		formParams.addAll(parseParameter(request));
 		formParams.addAll(parseInputStream(request));
 
@@ -35,8 +34,8 @@ public class RequestHelper {
 	 * @param request
 	 * @return
 	 */
-	private static List<ParamNode> parseParameter(HttpServletRequest request) {
-		List<ParamNode> formParams = new ArrayList<>();
+	private static List<FormParam> parseParameter(HttpServletRequest request) {
+		List<FormParam> formParams = new ArrayList<>();
 		Enumeration<String> parameterNames = request.getParameterNames();
 		while (parameterNames.hasMoreElements()) {
 			String fieldName = parameterNames.nextElement();
@@ -57,7 +56,7 @@ public class RequestHelper {
 					fieldValue = sb.toString();
 				}
 				//添加到参数列表中
-				formParams.add(new ParamNode(fieldName, fieldValue));
+				formParams.add(new FormParam(fieldName, fieldValue));
 			}
 		}
 
@@ -71,8 +70,8 @@ public class RequestHelper {
 	 * @return
 	 * @throws IOException
 	 */
-	private static List<ParamNode> parseInputStream(HttpServletRequest request) throws IOException {
-		List<ParamNode> formParams = new ArrayList<>();
+	private static List<FormParam> parseInputStream(HttpServletRequest request) throws IOException {
+		List<FormParam> formParams = new ArrayList<>();
 		String body = CodeUtil.decodeURL(streamtoString(request));
 		getBodyParams(body, formParams);
 
@@ -97,7 +96,7 @@ public class RequestHelper {
 	 * @param body
 	 * @param formParams
 	 */
-	private static void getBodyParams(String body, List<ParamNode> formParams) {
+	private static void getBodyParams(String body, List<FormParam> formParams) {
 		if (body != null) {
 			String[] params = StringUtils.splitByWholeSeparator(body, "&");
 			if (params.length > 0) {
@@ -105,7 +104,7 @@ public class RequestHelper {
 					String[] entry = StringUtils.splitByWholeSeparator(param, "=");
 					if (entry != null && entry.length == 2) {
 
-						formParams.add(new ParamNode(entry[0], entry[1]));
+						formParams.add(new FormParam(entry[0], entry[1]));
 					}
 				}
 			}

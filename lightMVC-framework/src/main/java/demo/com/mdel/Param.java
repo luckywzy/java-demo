@@ -1,23 +1,31 @@
 package demo.com.mdel;
 
+import demo.com.upload.FileParam;
 import demo.com.utils.CastUtil;
 import org.apache.commons.collections4.CollectionUtils;
 
-import java.io.ObjectOutputStream;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * 请求参数对象
  */
 public class Param {
 
-	private List<ParamNode> formParams;
+	private List<FormParam> formParams;
 
-	public Param(List<ParamNode> formParams) {
+	private List<FileParam> fileParams;
+
+	public Param(List<FormParam> formParams) {
 		this.formParams = formParams;
+	}
+
+	public Param(List<FormParam> formParams, List<FileParam> fileParams) {
+		this.formParams = formParams;
+		this.fileParams = fileParams;
 	}
 
 	//TODO:  转换为Object的参数 并不能在反射时 自动进行转型 String -》Integer
@@ -41,7 +49,7 @@ public class Param {
 		HashMap<String, Object> fieldMap = new HashMap<>();
 
 		if (CollectionUtils.isNotEmpty(formParams)) {
-			for (ParamNode param : formParams) {
+			for (FormParam param : formParams) {
 				String fieldName = param.getFieldName();
 				Object fieldValue = param.getFieldValue();
 				if (fieldMap.containsKey(fieldName)) {
@@ -53,6 +61,25 @@ public class Param {
 
 		return fieldMap;
 	}
+
+	/**
+	 * get file upload map
+	 * @return
+	 */
+	public Map<String, List<FileParam>> getFileMap() {
+		return CollectionUtils.isEmpty(fileParams) ? Collections.emptyMap() : fileParams.stream().collect(Collectors.groupingBy(FileParam::getFieldName));
+	}
+
+	public List<FileParam> getFileList(String fieldName){
+		return getFileMap().get(fieldName);
+	}
+
+	public FileParam getFile(String fieldName){
+		return getFileList(fieldName).stream().filter(e->e.getFieldName().equals(fieldName)).findFirst().orElse(null);
+	}
+
+
+
 
 	public boolean isEmpty() {
 		return CollectionUtils.isEmpty(formParams);

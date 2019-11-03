@@ -12,4 +12,5 @@ public interface ConfigConstant {
 	String APP_JSP_PATH = "lightMVC.framework.app.jsp_path";
 	String APP_STATIC_PATH = "lightMVC.framework.app.static_path";
 	String APP_UPLOAD_LIMIT = "lightMVC.framework.app.upload_limit";
+
 }

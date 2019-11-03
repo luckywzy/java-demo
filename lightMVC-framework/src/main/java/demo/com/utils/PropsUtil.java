@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Optional;
 import java.util.Properties;
 
 /**
@@ -62,5 +63,7 @@ public final class PropsUtil {
 		return res;
 	}
 
-
+	public static int getInt(Properties prop, String key){
+		return Optional.of(Integer.valueOf(prop.getProperty(key))).orElse(0);
+	}
 }
