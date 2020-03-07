@@ -1,7 +1,6 @@
 package demo.com.helper;
 
 import com.google.common.collect.Lists;
-import com.sun.deploy.net.HttpRequest;
 import demo.com.mdel.FormParam;
 import demo.com.mdel.Param;
 import demo.com.upload.FileParam;
@@ -12,7 +11,6 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.apache.commons.io.FileUtils;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -21,8 +19,6 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -40,17 +36,18 @@ public final class UploadHelper {
 	private static ServletFileUpload servletFileUpload;
 
 
-	public static void init(ServletContext servletContext){
+	public static void init(ServletContext servletContext) {
 		File repository = (File) servletContext.getAttribute("javax.servlet.context.tempdir");
 		new ServletFileUpload(new DiskFileItemFactory(DiskFileItemFactory.DEFAULT_SIZE_THRESHOLD, repository));
 		int limit = Optional.of(Integer.valueOf(ConfigHelper.getAppUploadLimit())).orElse(0);
-		if(limit != 0){
+		if (limit != 0) {
 			servletFileUpload.setFileSizeMax(limit * 1024 * 1024);
 		}
 	}
 
 	/**
 	 * create  fileUpload param（inputStream）
+	 *
 	 * @param request
 	 * @return
 	 * @throws FileUploadException
@@ -68,7 +65,7 @@ public final class UploadHelper {
 				if (fileItem.isFormField()) {
 					//form field
 					formParams.add(new FormParam(fieldName, fileItem.getString("UTF8")));
-				}else {
+				} else {
 					//file field
 					fileParams.add(new FileParam(
 							fieldName,
@@ -82,8 +79,8 @@ public final class UploadHelper {
 		return new Param(formParams, fileParams);
 	}
 
-	public static void uploadFile(String basePath, FileParam fileParam){
-		if(fileParam == null){
+	public static void uploadFile(String basePath, FileParam fileParam) {
+		if (fileParam == null) {
 			return;
 		}
 		try {
@@ -92,7 +89,7 @@ public final class UploadHelper {
 			StreamUtil.copyStream(
 					new BufferedInputStream(fileParam.getInputStream()),
 					new BufferedOutputStream(new FileOutputStream(filePath)));
-		}catch (Exception e){
+		} catch (Exception e) {
 			log.error("upload file failed.", e);
 			throw new RuntimeException(e);
 		}

@@ -1,6 +1,5 @@
 package demo.com.utils;
 
-import com.github.pagehelper.util.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -107,17 +106,17 @@ public class ClassUtil {
 			String fileName = file.getName();
 			if (file.isFile()) {
 				String className = fileName.substring(0, fileName.lastIndexOf("."));
-				if (StringUtil.isNotEmpty(packageName)) {
+				if (isNotEmpty(packageName)) {
 					className = packageName + "." + className;
 				}
 				doAddClass(classSet, className);
 			} else {
 				String subPackagePath = fileName;
-				if (StringUtil.isNotEmpty(packagePath)) {
+				if (isNotEmpty(packagePath)) {
 					subPackagePath = packagePath + "/" + subPackagePath;
 				}
 				String subPackageName = fileName;
-				if (StringUtil.isNotEmpty(packageName)) {
+				if (isNotEmpty(packageName)) {
 					subPackageName = packageName + "." + subPackageName;
 				}
 				addClass(classSet, subPackagePath, subPackageName);
@@ -128,6 +127,14 @@ public class ClassUtil {
 	private static void doAddClass(Set<Class<?>> classSet, String className) {
 		Class<?> cls = loadClass(className, false);
 		classSet.add(cls);
+	}
+
+	public static boolean isEmpty(String str) {
+		return str == null || str.length() == 0;
+	}
+
+	public static boolean isNotEmpty(String str) {
+		return !isEmpty(str);
 	}
 
 }
