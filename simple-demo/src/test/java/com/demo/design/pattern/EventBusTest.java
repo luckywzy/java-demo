@@ -1,8 +1,8 @@
 package com.demo.design.pattern;
 
+import com.demo.design.pattern.observer.EventBus;
+import com.demo.design.pattern.observer.Subscribe;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 /**
  * @Author: wangzongyu

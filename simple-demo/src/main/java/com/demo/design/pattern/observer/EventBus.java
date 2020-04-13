@@ -1,4 +1,4 @@
-package com.demo.design.pattern;
+package com.demo.design.pattern.observer;
 
 import com.google.common.util.concurrent.MoreExecutors;
 
