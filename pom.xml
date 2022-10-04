@@ -54,7 +54,7 @@
         <dom4j.version>1.6.1</dom4j.version>
         <lombok.version>1.16.10</lombok.version>
         <hessian.version>4.0.38</hessian.version>
-        <protobuf-java.version>3.5.1</protobuf-java.version>
+        <protobuf-java.version>3.16.3</protobuf-java.version>
     </properties>
 
     <dependencyManagement>
